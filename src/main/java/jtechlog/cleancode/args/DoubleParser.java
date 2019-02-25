@@ -1,18 +1,11 @@
 package jtechlog.cleancode.args;
 
-public class DoubleParser implements ArgumentParser<Double> {
-
-    private char argumentId;
+public class DoubleParser extends ArgumentParser<Double> {
 
     private double value;
 
     public DoubleParser(char argumentId) {
-        this.argumentId = argumentId;
-    }
-
-    @Override
-    public char getArgumentId() {
-        return argumentId;
+        super(argumentId);
     }
 
     @Override

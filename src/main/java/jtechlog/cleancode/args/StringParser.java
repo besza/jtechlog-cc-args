@@ -1,18 +1,11 @@
 package jtechlog.cleancode.args;
 
-public class StringParser implements ArgumentParser<String> {
-
-    private char argumentId;
+public class StringParser extends ArgumentParser<String> {
 
     private String value;
 
     public StringParser(char argumentId) {
-        this.argumentId = argumentId;
-    }
-
-    @Override
-    public char getArgumentId() {
-        return argumentId;
+        super(argumentId);
     }
 
     @Override

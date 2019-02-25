@@ -2,6 +2,7 @@ package jtechlog.cleancode.args;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -251,7 +252,7 @@ public class ArgsTest {
     @Test
     public void testMapDefaultValue() {
         Args args = new Args("x", new String[]{"-x", "alpha"});
-        assertEquals(Map.of(), args.getMap('x'));
+        assertEquals(Collections.emptyMap(), args.getMap('x'));
     }
 
     @Test

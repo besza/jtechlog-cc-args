@@ -1,21 +1,14 @@
 package jtechlog.cleancode.args;
 
-public class BooleanParser implements ArgumentParser<Boolean> {
-
-    private char argumentId;
+public class BooleanParser extends ArgumentParser<Boolean> {
 
     public BooleanParser(char argumentId) {
-        this.argumentId = argumentId;
+        super(argumentId);
     }
 
     @Override
     public Boolean getValue() {
         return true;
-    }
-
-    @Override
-    public char getArgumentId() {
-        return argumentId;
     }
 
     @Override

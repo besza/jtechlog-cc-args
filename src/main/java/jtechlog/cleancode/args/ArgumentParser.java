@@ -2,23 +2,31 @@ package jtechlog.cleancode.args;
 
 import java.util.List;
 
-public interface ArgumentParser<T> {
+public abstract class ArgumentParser<T> {
 
-    List<String> ARGUMENT_TYPE_DEFINITIONS = List.of("", "*", "#", "##", "[*]", "&");
+    private static List<String> ARGUMENT_TYPE_DEFINITIONS = List.of("", "*", "#", "##", "[*]", "&");
 
-    char getArgumentId();
+    protected char argumentId;
 
-    T getValue();
+    abstract T getValue();
 
-    default boolean isFlag() {
+    public ArgumentParser(char argumentId) {
+        this.argumentId = argumentId;
+    }
+
+    public boolean isFlag() {
         return false;
     }
 
-    static boolean isValidArgumentTypeDefinition(String format) {
+    public char getArgumentId() {
+        return argumentId;
+    }
+
+    public static boolean isValidArgumentTypeDefinition(String format) {
         return ARGUMENT_TYPE_DEFINITIONS.contains(format);
     }
 
-    static ArgumentParser getParser(char argumentId, String argumentTypeDefinition) {
+    public static ArgumentParser getParser(char argumentId, String argumentTypeDefinition) {
         switch (argumentTypeDefinition) {
             case "":
                 return new BooleanParser(argumentId);
@@ -38,7 +46,7 @@ public interface ArgumentParser<T> {
 
     }
 
-    void parseArgument(String arg);
+    abstract void parseArgument(String arg);
 
-    void handleNotFound();
+    abstract void handleNotFound();
 }

@@ -3,19 +3,12 @@ package jtechlog.cleancode.args;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringArrayParser implements ArgumentParser<String[]> {
-
-    private char argumentId;
+public class StringArrayParser extends ArgumentParser<String[]> {
 
     private List<String> value = new ArrayList<>();
 
     public StringArrayParser(char argumentId) {
-        this.argumentId = argumentId;
-    }
-
-    @Override
-    public char getArgumentId() {
-        return argumentId;
+        super(argumentId);
     }
 
     @Override

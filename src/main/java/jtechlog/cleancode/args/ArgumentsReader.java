@@ -1,6 +1,7 @@
 package jtechlog.cleancode.args;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class ArgumentsReader {
 
@@ -36,9 +37,8 @@ public class ArgumentsReader {
         } else if (arg.startsWith(ARGUMENT_ID_PREFIX)) {
             parseArgumentIds(arg);
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     private void parseArgumentValue(String arg) {
@@ -47,10 +47,7 @@ public class ArgumentsReader {
     }
 
     private void parseArgumentIds(String arg) {
-        for (int i = 1; i < arg.length(); i++) {
-            char argumentId = arg.charAt(i);
-            parseArgumentId(argumentId);
-        }
+        IntStream.range(1, arg.length()).forEach(i -> parseArgumentId(arg.charAt(i)));
     }
 
     private void parseArgumentId(char argumentId) {

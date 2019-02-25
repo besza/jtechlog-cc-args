@@ -4,10 +4,10 @@ public class ArgsMain {
 
     public static void main(String[] args) {
         try {
-            Args arg = new Args("l,p#,d*", args);
-            boolean logging = arg.getBoolean('l');
-            int port = arg.getInt('p');
-            String directory = arg.getString('d');
+            var arg = new Args("l,p#,d*", args);
+            var logging = arg.getBoolean('l');
+            var port = arg.getInt('p');
+            var directory = arg.getString('d');
             executeApplication(logging, port, directory);
         } catch (ArgsException ae) {
             System.out.printf("Argument error: %s\n", ae.getMessage());

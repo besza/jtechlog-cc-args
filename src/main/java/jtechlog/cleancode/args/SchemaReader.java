@@ -1,36 +1,37 @@
 package jtechlog.cleancode.args;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class SchemaReader {
 
-    private Map<Character, String> schemaElements = new HashMap<>();
-
     public Map<Character, String> readSchema(String schema) {
-        if ("".equals(schema.trim())) {
-            return schemaElements;
+        if (schema.isBlank()) {
+            return Collections.emptyMap();
         }
 
-        String[] tokens = schema.split(",");
-        for (String token : tokens) {
-            addTokenToSchemaElements(token.trim());
-        }
-        return schemaElements;
+        return Arrays.stream(schema.split(","))
+                .map(String::trim)
+                .collect(Collectors.toMap(this::argumentIdMapper, this::argumentDefinitionMapper));
     }
 
-    private void addTokenToSchemaElements(String token) {
-        char argumentId = token.charAt(0);
+    private Character argumentIdMapper(String token) {
+        var argumentId = token.charAt(0);
         if (!Character.isLetter(argumentId)) {
             throw ArgsException.withDefaultMessage(ErrorCode.INVALID_ARGUMENT_ID, argumentId);
         }
+        return argumentId;
+    }
 
-        String argumentTypeDefinition = token.substring(1);
+    private String argumentDefinitionMapper(String token) {
+        var argumentTypeDefinition = token.substring(1);
         if (!ArgumentParser.isValidArgumentTypeDefinition(argumentTypeDefinition)) {
-            throw ArgsException.withDefaultMessage(ErrorCode.INVALID_FORMAT, argumentId);
+            throw ArgsException.withDefaultMessage(ErrorCode.INVALID_FORMAT, token.charAt(0)); //TODO: should not repeat
         }
-
-        schemaElements.put(argumentId, argumentTypeDefinition);
+        return argumentTypeDefinition;
     }
 
 }

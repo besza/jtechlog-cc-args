@@ -56,7 +56,7 @@ public class Args {
         if (parser instanceof MapParser) {
             return ((MapParser) parser).getValue();
         }
-        return Map.of();
+        return Collections.emptyMap();
     }
 
     public boolean has(char argumentId) {

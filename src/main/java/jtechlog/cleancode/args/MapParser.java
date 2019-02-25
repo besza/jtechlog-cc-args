@@ -3,21 +3,14 @@ package jtechlog.cleancode.args;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapParser implements ArgumentParser<Map<String, String>> {
+public class MapParser extends ArgumentParser<Map<String, String>> {
 
     private static final String MAP_ENTRY_SEPARATOR = ",";
-
-    private char argumentId;
 
     private Map<String, String> value = new HashMap<>();
 
     public MapParser(char argumentId) {
-        this.argumentId = argumentId;
-    }
-
-    @Override
-    public char getArgumentId() {
-        return argumentId;
+        super(argumentId);
     }
 
     @Override

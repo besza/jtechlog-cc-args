@@ -1,18 +1,11 @@
 package jtechlog.cleancode.args;
 
-public class IntParser implements ArgumentParser<Integer> {
-
-    private char argumentId;
+public class IntParser extends ArgumentParser<Integer> {
 
     private int value;
 
     public IntParser(char argumentId) {
-        this.argumentId = argumentId;
-    }
-
-    @Override
-    public char getArgumentId() {
-        return argumentId;
+        super(argumentId);
     }
 
     @Override
